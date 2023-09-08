@@ -1,0 +1,8 @@
+.places__about {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 246px;
+  margin: 21px auto 24.5px 21px;
+  box-sizing: border-box;
+}

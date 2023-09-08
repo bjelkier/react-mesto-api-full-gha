@@ -1,0 +1,6 @@
+.popup__input-block {
+  display: grid;
+  padding: 0;
+  margin: 0;
+  border: none;
+}

@@ -1,0 +1,23 @@
+.places__gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(min-content, 282px));
+  gap: 20px 17px;
+  list-style: none;
+  padding: 0;
+}
+
+@media screen and (max-width: 985px) {
+  .places__gallery {
+    grid-template-columns: repeat(2, minmax(min-content, 282px));
+    max-width: 581px;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 636px) {
+  .places__gallery {
+    grid-template-columns: repeat(1, minmax(min-content, 282px));
+    max-width: 282px;
+    gap: 20px 0;
+  }
+}

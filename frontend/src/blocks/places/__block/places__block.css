@@ -1,0 +1,14 @@
+.places__block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px auto 31px 21px;
+    max-width: 246px;
+    box-sizing: border-box;
+}
+
+@media screen and (max-width: 320px) {
+    .places__block {
+        margin: 21px 20px 31px 20px;
+    }
+}
