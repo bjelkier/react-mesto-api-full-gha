@@ -1,6 +1,6 @@
 class Auth {
   constructor() {
-    this._baseUrl = 'http://localhost:6000';
+    this._baseUrl = 'http://localhost:5000';
     this._headers = {
       'Content-Type': 'application/json'
     }
