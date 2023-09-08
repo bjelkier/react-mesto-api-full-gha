@@ -4,7 +4,7 @@ const { errors } = require('celebrate');
 const router = require('./routes/index');
 
 const INTERNAL_SERVER_ERROR = 500;
-const { PORT = 4000 } = process.env;
+const { PORT = 3200 } = process.env;
 
 const app = express();
 
