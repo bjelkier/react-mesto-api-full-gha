@@ -13,23 +13,23 @@ class Api {
 
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
-      credentials: 'include',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     }).then(this._getResponseData)
   }
 
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      credentials: 'include',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     }).then(this._getResponseData)
   }
 
   editProfile(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
-      credentials: 'include',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name: name,
         about: about
@@ -40,8 +40,8 @@ class Api {
   updateUserPic(avatarLink) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
-      credentials: 'include',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         avatar: avatarLink
       })
@@ -51,8 +51,8 @@ class Api {
   addCard(name, link) {
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
-      credentials: 'include',
       headers: this._headers,
+      credentials: 'include',
       body: JSON.stringify({
         name,
         link
@@ -63,30 +63,30 @@ class Api {
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
       method: 'DELETE',
-      credentials: 'include',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     }).then(this._getResponseData)
   }
 
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
-      credentials: 'include',
-      headers: this._headers
+      headers: this._headers,
+      credentials: 'include'
     }).then(this._getResponseData)
   }
 
   addLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'PUT',
+      headers: this._headers,
       credentials: 'include',
-      headers: this._headers
     }).then(this._getResponseData)
   }
 }
 
 export const api = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-66',
+  baseUrl: 'https://api.bjelkier.nomoredomainsicu.ru',
   headers: {
     authorization: '4f377772-e7bc-4af1-a1d5-19f46cf40a60',
     'Content-Type': 'application/json'
