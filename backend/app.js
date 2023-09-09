@@ -10,8 +10,8 @@ const { PORT = 3200 } = process.env;
 const corsOptions = {
   origin: ['http://localhost:3000',
     'http://localhost:3200',
-    'https://bjelkier.nomoredomainsicu.ru ',
-    'http://api.bjelkier.nomoredomainsicu.ru '],
+    'https://bjelkier.nomoredomainsicu.ru',
+    'http://api.bjelkier.nomoredomainsicu.ru'],
   credentials: true,
 };
 
