@@ -2,10 +2,13 @@ const validationError = require('mongoose').Error.ValidationError;
 const castError = require('mongoose').Error.CastError;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+require('dotenv').config();
 const User = require('../models/user');
 const BadRequest = require('../errors/BadRequest');
 const NotFound = require('../errors/NotFound');
 const Conflict = require('../errors/Conflict');
+
+const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.getUsers = (req, res, next) => {
   User.find({})
@@ -93,28 +96,57 @@ module.exports.updateAvatar = (req, res, next) => {
     });
 };
 
+module.exports.getUserMe = (req, res, next) => {
+  User.findById(req.user._id)
+    .then(((data) => res.send(data)))
+    .catch(next);
+};
+
 module.exports.login = (req, res, next) => {
   const { email, password } = req.body;
   User.findUserByCredentials(email, password)
     .then((user) => {
       const token = jwt.sign(
         { _id: user._id },
-        'iam-extra-tired',
+        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      res.cookie('jwt', token, {
-        maxAge: 3600000 * 24 * 7,
-        httpOnly: true,
-        sameSite: true,
-      });
+      const userAgent = req.get('User-Agent');
+      const regEx = /Chrome\/\d+/;
+      if (userAgent.match(regEx) && userAgent.match(regEx).toString().replace('Chrome/', '') > 80) {
+        res.cookie('jwt', token, {
+          maxAge: 3600000 * 24 * 7,
+          httpOnly: true,
+          sameSite: 'None',
+          secure: true,
+        });
+      } else {
+        res.cookie('jwt', token, {
+          maxAge: 3600000 * 24 * 7,
+          httpOnly: true,
+          sameSite: 'Strict',
+        });
+      }
       res.send({ jwt: token })
         .end();
     })
-    .catch(next);
+    .catch((err) => {
+      next(err);
+    });
 };
 
-module.exports.getUserMe = (req, res, next) => {
-  User.findById(req.user._id)
-    .then(((data) => res.send(data)))
-    .catch(next);
+module.exports.logout = (req, res) => {
+  const userAgent = req.get('User-Agent');
+  const regEx = /Chrome\/\d+/;
+  if (userAgent.match(regEx) && userAgent.match(regEx).toString().replace('Chrome/', '') > 80) {
+    res.clearCookie('jwt', {
+      sameSite: 'None',
+      secure: true,
+    });
+  } else {
+    res.clearCookie('jwt', {
+      sameSite: 'Strict',
+    });
+  }
+  res.send({ message: 'Выход' });
 };
