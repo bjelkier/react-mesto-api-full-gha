@@ -181,6 +181,7 @@ function App() {
       setEmail(res.data.email)
     })
       .catch((err) => {
+        setLoggedIn(false)
         console.log('Ошибка.....:', err);
       })
   }
