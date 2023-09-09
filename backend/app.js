@@ -7,9 +7,19 @@ const router = require('./routes/index');
 const INTERNAL_SERVER_ERROR = 500;
 const { PORT = 3200 } = process.env;
 
+const corsOptions = {
+  origin: ['http://localhost:3200',
+    'https://bjelkier.nomoredomainsicu.ru ',
+    'http://api.bjelkier.nomoredomainsicu.ru '],
+  credentials: true,
+};
+
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+app.use(cors(corsOptions));
+
 app.use('/', router);
 
 app.use('/', errors());
