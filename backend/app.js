@@ -12,6 +12,7 @@ const corsOptions = {
     'http://localhost:3200',
     'https://bjelkier.nomoredomainsicu.ru',
     'http://api.bjelkier.nomoredomainsicu.ru'],
+  credentials: true,
 };
 
 const app = express();
