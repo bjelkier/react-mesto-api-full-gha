@@ -79,7 +79,7 @@ class Api {
 export const api = new Api({
   baseUrl: 'https://api.bjelkier.nomoredomainsicu.ru',
   headers: {
-    authorization: '4f377772-e7bc-4af1-a1d5-19f46cf40a60',
+    authorization: 'ab51eafb9fe6bda559c40333d88435765afe0c44bd803b5007a3d69a182f165b',
     'Content-Type': 'application/json'
   }
 });
