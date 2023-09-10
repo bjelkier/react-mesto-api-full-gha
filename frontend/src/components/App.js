@@ -178,10 +178,9 @@ function App() {
     auth.checkToken().then((res) => {
       navigate('/', { replace: true });
       setLoggedIn(true);
-      setEmail(res.data.email)
+      setEmail(res.email)
     })
       .catch((err) => {
-        setLoggedIn(false)
         console.log('Ошибка.....:', err);
       })
   }
