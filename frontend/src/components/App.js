@@ -35,19 +35,18 @@ function App() {
     api.getProfile()
       .then(data => {
         setCurrentUser(data);
+        api.getCards()
+          .then(data => {
+            setCards(data);
+          })
+          .catch(error => {
+            console.log('Ошибка.....:', error);
+          });
+        handleTokenCheck();
       })
       .catch(error => {
         console.log('Ошибка.....:', error);
       });
-
-    api.getCards()
-      .then(data => {
-        setCards(data);
-      })
-      .catch(error => {
-        console.log('Ошибка.....:', error);
-      });
-    handleTokenCheck();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
