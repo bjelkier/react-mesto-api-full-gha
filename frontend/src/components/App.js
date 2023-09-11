@@ -32,28 +32,19 @@ function App() {
 
 
   useEffect(() => {
-    api.getProfile()
-      .then(data => {
-        setCurrentUser(data);
-        api.getCards()
-          .then(data => {
-            setCards(data);
-          })
-          .catch(error => {
-            console.log('Ошибка.....:', error);
-          });
-        handleTokenCheck();
-      })
-      .catch(error => {
-        console.log('Ошибка.....:', error);
-      });
+
+    
+
+      handleTokenCheck();
+      
+   
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function handleUpdateProfile({ name, about }) {
     api.editProfile(name, about)
-      .then(data => {
-        setCurrentUser(data);
+      .then(result => {
+        setCurrentUser(result.data);
         closeAllPopups();
       })
       .catch(error => {
@@ -88,7 +79,7 @@ function App() {
   function handleCardLike(card) {
     api.addLike(card._id)
       .then(updatedCard => {
-        const updatedCards = cards.map(c => (c._id === card._id ? updatedCard : c));
+        const updatedCards = cards.map(c => (c._id === card._id ? updatedCard.data : c));
         setCards(updatedCards);
       })
       .catch(error => {
@@ -99,7 +90,7 @@ function App() {
   function handleCardDislike(card) {
     api.deleteLike(card._id)
       .then(updatedCard => {
-        const updatedCards = cards.map(c => (c._id === card._id ? updatedCard : c));
+        const updatedCards = cards.map(c => (c._id === card._id ? updatedCard.data : c));
         setCards(updatedCards);
       })
       .catch(error => {
@@ -119,8 +110,8 @@ function App() {
 
   function handleUpdateAvatar(newAvatar) {
     api.updateUserPic(newAvatar.avatar)
-      .then((data) => {
-        setCurrentUser(data);
+      .then((result) => {
+        setCurrentUser(result.data);
         closeAllPopups();
       })
       .catch((error) => {
@@ -131,6 +122,7 @@ function App() {
   function handleAddPlaceSubmit(data) {
     api.addCard(data.name, data.link)
       .then(newCard => {
+
         setCards([newCard.data, ...cards]);
         setIsAddPlacePopupOpen(false);
       })
@@ -177,18 +169,38 @@ function App() {
     auth.checkToken().then((res) => {
       navigate('/', { replace: true });
       setLoggedIn(true);
-      setEmail(res.email)
-    })
-      .catch((err) => {
-        console.log('Ошибка.....:', err);
-      })
-  }
+      setEmail(res.email);
 
-  const handleExit = () => {
-    auth.logout().then(() => {
+      api.getProfile()
+      .then(data => {
+        
+        setCurrentUser(data);
+        api.getCards()
+        .then(data => {
+          setCards(data);
+        })
+        .catch(error => {
+          console.log('Ошибка.....:', error);
+        });
+
+        
+      
+
+      })
+      .catch(error => {
+        console.log('Ошибка.....:', error);
+      });
+
+    }).catch((err) => {
       setEmail('');
       setLoggedIn(false);
-    }).catch((err) => console.log(err));
+      });
+  }
+
+  function handleExit() {
+    auth.logout();
+    setEmail('');
+    setLoggedIn(false)
   }
 
   return (

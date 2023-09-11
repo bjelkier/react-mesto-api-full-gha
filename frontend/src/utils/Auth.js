@@ -34,21 +34,27 @@ class Auth {
         "password": password,
         "email": email,
       })
-    }).then(this._checkResponse);
+    }).then(this._checkResponse).catch(error => {
+      console.log('Ошибка.....:', error);
+    });
   }
 
   logout() {
     return fetch(`${this._baseUrl}/signout`, {
       method: 'GET',
       credentials:"include"
-    }).then(this._checkResponse);
+    }).then(this._checkResponse).catch(error => {
+      console.log('Ошибка.....:', error);
+    });
   }
 
   checkToken() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       credentials:"include"
-    }).then(this._checkResponse);
+    }).then(this._checkResponse).catch(error => {
+      console.log('Ошибка.....:', error);
+    });
   }
 }
 

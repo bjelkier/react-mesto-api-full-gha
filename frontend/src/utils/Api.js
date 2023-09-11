@@ -28,8 +28,9 @@ class Api {
 
   editProfile(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
-      credentials: 'include',
       method: 'PATCH',
+      credentials: 'include',
+      headers: this._headers,
       body: JSON.stringify({
         name: name,
         about: about
@@ -71,6 +72,7 @@ class Api {
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers
     }).then(this._getResponseData)
   }
