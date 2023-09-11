@@ -3,6 +3,7 @@ const auth = require('../middlewares/auth');
 const {
   validationUserAvatar,
   validationUserId,
+  validationUserInfo,
 } = require('../middlewares/validation');
 
 const {
@@ -17,7 +18,7 @@ userRouter.use(auth);
 userRouter.get('/', getUsers);
 userRouter.get('/me', getUserMe);
 userRouter.get('/:id', validationUserId, getUserById);
-userRouter.patch('/me', updateUser);
+userRouter.patch('/me', validationUserInfo, updateUser);
 userRouter.patch('/me/avatar', validationUserAvatar, updateAvatar);
 
 module.exports = userRouter;

@@ -184,11 +184,6 @@ function App() {
       })
   }
 
-  // function handleExit() {
-  //   setEmail('');
-  //   setLoggedIn(false)
-  // }
-
   const handleExit = () => {
     auth.logout().then(() => {
       setEmail('');
