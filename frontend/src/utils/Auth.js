@@ -28,6 +28,7 @@ class Auth {
   login(email, password) {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
+      credentials:"include",
       headers: this._headers,
       body: JSON.stringify({
         "password": password,
@@ -39,14 +40,14 @@ class Auth {
   logout() {
     return fetch(`${this._baseUrl}/signout`, {
       method: 'GET',
-      credentials: "include"
+      credentials:"include"
     }).then(this._checkResponse);
   }
 
   checkToken() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      credentials: "include"
+      credentials:"include"
     }).then(this._checkResponse);
   }
 }
