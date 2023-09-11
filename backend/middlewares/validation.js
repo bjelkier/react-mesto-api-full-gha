@@ -25,26 +25,20 @@ const validateId = (Id) => {
 };
 
 module.exports.validationUserInfo = celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    about: Joi.string().required().min(2).max(30),
-  }),
+  name: Joi.string().required().min(2).max(30),
+  about: Joi.string().required().min(2).max(30),
 });
 
 module.exports.validationUserAvatar = celebrate({
-  body: Joi.object().keys({
-    avatar: Joi.string().required().custom(validateURL),
-  }),
+  avatar: Joi.string().required().custom(validateURL),
 });
 
 module.exports.validationEmailAndPassword = celebrate({
-  body: Joi.object().keys({
-    email: Joi.string().required().custom(validateEmail),
-    password: Joi.string().required().min(6),
-    name: Joi.string().min(2).max(30),
-    about: Joi.string().min(2).max(30),
-    avatar: Joi.string().custom(validateURL),
-  }),
+  email: Joi.string().required().custom(validateEmail),
+  password: Joi.string().required().min(6),
+  name: Joi.string().min(2).max(30),
+  about: Joi.string().min(2).max(30),
+  avatar: Joi.string().custom(validateURL),
 });
 
 module.exports.validationUserId = celebrate({
@@ -54,10 +48,8 @@ module.exports.validationUserId = celebrate({
 });
 
 module.exports.validationCardInfo = celebrate({
-  body: Joi.object().keys({
-    name: Joi.string().required().min(2).max(30),
-    link: Joi.string().required().custom(validateURL),
-  }),
+  name: Joi.string().required().min(2).max(30),
+  link: Joi.string().required().custom(validateURL),
 });
 
 module.exports.validationCardId = celebrate({
