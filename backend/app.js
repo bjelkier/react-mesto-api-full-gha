@@ -28,11 +28,6 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-// eslint-disable-next-line no-unused-vars
-app.get('/posts', (req, res) => {
-  console.log(req.cookies.jwt); // достаём токен
-});
-
 app.use('/', router);
 
 app.use('/', errors());

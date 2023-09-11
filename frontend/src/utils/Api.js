@@ -13,22 +13,23 @@ class Api {
 
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
-      headers: this._headers,
+      method: 'GET',
       credentials: 'include',
+      headers: this._headers,
     }).then(this._getResponseData)
   }
 
   getCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      headers: this._headers,
       credentials: 'include',
+      headers: this._headers,
     }).then(this._getResponseData)
   }
 
   editProfile(name, about) {
     return fetch(`${this._baseUrl}/users/me`, {
-      method: 'PATCH',
       credentials: 'include',
+      method: 'PATCH',
       body: JSON.stringify({
         name: name,
         about: about
@@ -61,8 +62,8 @@ class Api {
 
   deleteCard(id) {
     return fetch(`${this._baseUrl}/cards/${id}`, {
-      credentials: 'include',
       method: 'DELETE',
+      credentials: 'include',
       headers: this._headers
     }).then(this._getResponseData)
   }
@@ -70,7 +71,6 @@ class Api {
   deleteLike(id) {
     return fetch(`${this._baseUrl}/cards/${id}/likes`, {
       method: 'DELETE',
-      credentials: 'include',
       headers: this._headers
     }).then(this._getResponseData)
   }
@@ -87,7 +87,8 @@ class Api {
 export const api = new Api({
   baseUrl: 'https://api.bjelkier.nomoredomainsicu.ru',
   headers: {
-    'Content-Type': 'application/json',
+    authorization: 'ab51eafb9fe6bda559c40333d88435765afe0c44bd803b5007a3d69a182f165b',
+    'Content-Type': 'application/json'
   }
 });
 
