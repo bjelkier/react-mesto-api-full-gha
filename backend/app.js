@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const router = require('./routes/index');
 
 const INTERNAL_SERVER_ERROR = 500;
@@ -16,10 +17,16 @@ const corsOptions = {
 };
 
 const app = express();
-app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
 app.use(cors(corsOptions));
+
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 app.use('/', router);
 
