@@ -184,17 +184,17 @@ function App() {
       })
   }
 
-  function handleExit() {
-    setEmail('');
-    setLoggedIn(false)
-  }
-
-  // const handleExit = () => {
-  //   auth.logout().then(() => {
-  //     setEmail('');
-  //     setLoggedIn(false);
-  //   }).catch((err) => console.log(err));
+  // function handleExit() {
+  //   setEmail('');
+  //   setLoggedIn(false)
   // }
+
+  const handleExit = () => {
+    auth.logout().then(() => {
+      setEmail('');
+      setLoggedIn(false);
+    }).catch((err) => console.log(err));
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
