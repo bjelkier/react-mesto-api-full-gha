@@ -67,7 +67,6 @@ module.exports.likeCard = (req, res, next) => {
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
-    .populate('owner')
     .then((card) => {
       if (card) {
         res.send({ data: card });
