@@ -29,7 +29,7 @@ class Auth {
     return fetch(`${this._baseUrl}/signin`, {
       method: 'POST',
       headers: this._headers,
-      credentials: 'include',
+      credentials: 'same-origin',
       body: JSON.stringify({
         "password": password,
         "email": email,
@@ -40,14 +40,14 @@ class Auth {
   logout() {
     return fetch(`${this._baseUrl}/signout`, {
       method: 'GET',
-      credentials: 'include',
+      credentials: 'same-origin',
     }).then(this._checkResponse);
   }
 
   checkToken() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
-      credentials: 'include',
+      credentials: 'same-origin',
     }).then(this._checkResponse);
   }
 }
