@@ -5,6 +5,7 @@ const WrongData = require('../errors/WrongData');
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports = (req, res, next) => {
+  console.log(res.cookies);
   if (!req.cookies.jwt) {
     next(new WrongData('Требуется авторизация'));
   }
