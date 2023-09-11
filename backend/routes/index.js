@@ -6,6 +6,7 @@ const NotFound = require('../errors/NotFound');
 const {
   createUser,
   login,
+  logout,
 } = require('../controllers/users');
 
 const {
@@ -14,6 +15,7 @@ const {
 
 router.post('/signin', validationEmailAndPassword, login);
 router.post('/signup', validationEmailAndPassword, createUser);
+router.get('/signout', logout);
 router.use('/users', userRouter);
 router.use('/cards', cardRouter);
 router.use('*', (req, res, next) => {
