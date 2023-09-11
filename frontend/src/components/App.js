@@ -131,7 +131,7 @@ function App() {
   function handleAddPlaceSubmit(data) {
     api.addCard(data.name, data.link)
       .then(newCard => {
-        setCards((prevCards) => [newCard, ...prevCards]);
+        setCards([newCard.data, ...cards]);
         setIsAddPlacePopupOpen(false);
       })
       .catch(error => {
