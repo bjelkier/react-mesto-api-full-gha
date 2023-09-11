@@ -12,7 +12,9 @@ const corsOptions = {
   origin: ['http://localhost:3000',
     'http://localhost:3200',
     'https://bjelkier.nomoredomainsicu.ru',
-    'http://api.bjelkier.nomoredomainsicu.ru'],
+    'http://api.bjelkier.nomoredomainsicu.ru',
+    'http://bjelkier.nomoredomainsicu.ru',
+    'https://api.bjelkier.nomoredomainsicu.ru'],
   credentials: true,
 };
 
