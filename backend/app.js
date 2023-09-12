@@ -4,6 +4,7 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const router = require('./routes/index');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const INTERNAL_SERVER_ERROR = 500;
 const { PORT = 3200 } = process.env;
@@ -20,6 +21,7 @@ const corsOptions = {
 
 const app = express();
 app.use(cookieParser());
+app.use(requestLogger);
 app.use(express.json());
 
 app.use(cors(corsOptions));
@@ -31,6 +33,8 @@ app.get('/crash-test', () => {
 });
 
 app.use('/', router);
+
+app.use(errorLogger);
 
 app.use('/', errors());
 

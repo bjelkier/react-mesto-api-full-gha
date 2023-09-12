@@ -32,12 +32,7 @@ function App() {
 
 
   useEffect(() => {
-
-    
-
-      handleTokenCheck();
-      
-   
+    handleTokenCheck();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -172,29 +167,24 @@ function App() {
       setEmail(res.email);
 
       api.getProfile()
-      .then(data => {
-        
-        setCurrentUser(data);
-        api.getCards()
         .then(data => {
-          setCards(data);
+          setCurrentUser(data);
+          api.getCards()
+            .then(data => {
+              setCards(data);
+            })
+            .catch(error => {
+              console.log('Ошибка.....:', error);
+            });
         })
         .catch(error => {
           console.log('Ошибка.....:', error);
         });
 
-        
-      
-
-      })
-      .catch(error => {
-        console.log('Ошибка.....:', error);
-      });
-
     }).catch((err) => {
       setEmail('');
       setLoggedIn(false);
-      });
+    });
   }
 
   function handleExit() {
