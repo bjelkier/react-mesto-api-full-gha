@@ -25,11 +25,11 @@ function Login({ onSubmit }) {
       <div className="login__container">
         <h3 className="login__heading">Вход</h3>
         <form className="login__form" name="login" onSubmit={handleSubmit}>
-          <input className="login__input login__input_value_email" type="email" required
-            placeholder="Email" name="email" id="email" onChange={handleEmailChange} value={loginValue['email']} />
+          <input className="login__input login__input_value_email" type="email" required placeholder="Email" name="email"
+            id="email" onChange={handleEmailChange} value={loginValue['email']} />
           <span className="login__input-error"></span>
-          <input className="login__input login__input_value_password" type="text" required
-            placeholder="Пароль" name="password" id="password" onChange={handlePasswordChange} value={loginValue['password']} />
+          <input className="login__input login__input_value_password" type="password" required placeholder="Пароль"
+            name="password" id="password" onChange={handlePasswordChange} value={loginValue['password']} />
           <span className="login__input-error"></span>
           <button type="submit" className="login__submit" aria-label="Войти">Войти</button>
         </form>
